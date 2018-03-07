@@ -1,0 +1,45 @@
+﻿
+
+@model IEnumerable<CourseaApplication.Models.Course>
+
+@{
+    ViewBag.Title = "Courses";
+}
+
+<h2>Courses</h2>
+@Html.ActionLink("Create New", "Create", "Course", new { @class="btn btn-primary"})
+@if (Model != null)
+{
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Modules</th>
+                <th>Completed</th>
+                <th>Action(s)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var course in Model)
+            {
+                <tr>
+                    <td>@course.Title</td>
+                    <td>@course.Modules</td>
+                    <td>@(course.Completed ? "Yes" : "No")</td>
+                    <td>
+                        @Html.ActionLink("Details", "GetItemsAsync", new { id = course.id })
+                        @Html.ActionLink("Edit", "EditAsync", new { id = course.id })
+                        @Html.ActionLink("Delete", "DeleteAsync", new { id = course.id })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h4>No courses found!</h4>
+    @Html.ActionLink("Create New", "Create", new { @class = "btn btn primary" })
+}
+
+
